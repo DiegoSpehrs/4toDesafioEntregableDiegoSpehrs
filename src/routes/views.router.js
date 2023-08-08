@@ -3,12 +3,12 @@ import { Router } from "express";
 const router = Router()
 
 
-router.get('/',(res,req) =>{
-    res.render('productsHome')
+router.get('/',(req,res) =>{
+    res.render('bodyHome')
 })
 
 router.post('/realtimeproducts',(req,res)=>{    
-    res.render('productsInRealTime')
+    res.render('realTimeProducts')
 })
 
 

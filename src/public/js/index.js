@@ -48,3 +48,45 @@ socketClient.on('arrProductsHome',(arrProducts)=>{
     productListHome.innerHTML = arrProd
 
 })
+
+socketClient.on('arrProductsRealTime', (arrProducts)=>{
+    const arrProd = [...arrProducts]
+    .map((objProduct)=>{
+        return `<p> title: ${objProduct.title}
+                    description: ${objProduct.description}
+                    price: $${objProduct.price}
+                    code: ${objProduct.code}
+                    stock: ${objProduct.stock}`
+    })
+    productListInRealTime.innerHTML = arrProd
+})
+
+socketClient.on('productoAgregado',(arrProducts)=>{
+    const arrProd = [...arrProducts]
+    .map((objProduct)=>{
+        return `<p> title: ${objProduct.title}
+                    description: ${objProduct.description}
+                    price: $${objProduct.price}
+                    code: ${objProduct.code}
+                    stock: ${objProduct.stock}`
+    })
+    productListInRealTime.innerHTML = arrProd
+})
+
+socketClient.on('productoEliminado',(arrProducts)=>{
+    const arrProd = [...arrProducts]
+    .map((objProduct)=>{
+        return `<p> title: ${objProduct.title}
+                    description: ${objProduct.description}
+                    price: $${objProduct.price}
+                    code: ${objProduct.code}
+                    stock: ${objProduct.stock}`
+    })
+    productListInRealTime.innerHTML = arrProd
+})
+
+
+
+
+
+

@@ -151,6 +151,7 @@ const arrProducts = [
 socketServer.on('connection',(socket)=>{
     console.log(`Usuario conectado: ${socket.id}`);
     socketServer.emit('arrProductsHome',arrProducts)
+    socketServer.emit('arrProductsRealTime',arrProducts)
     
     socket.on('disconnect',()=>{
         console.log(`Usuario desconectado: ${socket.id}`);
@@ -159,11 +160,14 @@ socketServer.on('connection',(socket)=>{
     socketServer.on('addProduct',(product)=>{ 
         const newProduct = {...product}
         arrProducts.push(newProduct)
+        socketServer.emit('productoAgregado',arrProducts)
     })
 
     socketServer.on('deletPorduct',(idProduct)=>{
         arrPrev = arrProducts
        const newArrProducts = arrProducts.filter((p)=> p.id !== idProduct)
+
+       socketServer.emit('productoEliminado',arrProducts)
     })
 })
 
