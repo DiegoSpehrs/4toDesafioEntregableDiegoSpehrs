@@ -35,6 +35,7 @@ const socketServer = new Server(httpServer)
 
 
 
+
 socketServer.on('connection',(socket)=>{
     console.log(`Usuario conectado: ${socket.id}`);
     
@@ -49,7 +50,7 @@ socketServer.on('connection',(socket)=>{
                 newProduct.stock,
                 newProduct.id                
             );
-            socketServer.emit('addedProduct',addProduct)
+            socketServer.emit("addProductSuccess", addProduct);
         }catch(error){
             socket.emit('errorAddProd',"error al agregar el producto")
         }  
@@ -58,7 +59,7 @@ socketServer.on('connection',(socket)=>{
     socketServer.on('deletPorduct',async(idProduct)=>{
         try{
             const producDeleted = await productManager.deletProduct(idProduct)
-            socketServer.emit('deletedProduct',producDeleted)
+            socketServer.emit("deleteProductSuccess", producDeleted);
         }catch(error){
             socket.emit('errorDeletedProd',"error al eliminar el producto")
         }

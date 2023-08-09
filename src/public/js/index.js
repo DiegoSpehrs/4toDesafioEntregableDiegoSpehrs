@@ -12,8 +12,7 @@ const idProduct = document.getElementById('idProduct')
 const formularioDeletProduct = document.getElementById('formDeleteProduct')
 const id = document.getElementById('idProductDeleted')
 
-const productListHome = document.getElementById('productsHome')
-const productListInRealTime = document.getElementById('productsInRealTime')
+
 
 formularioAddProduct.onsubmit = (e)=>{
     e.preventDefault()
@@ -31,47 +30,29 @@ formularioAddProduct.onsubmit = (e)=>{
 
 formularioDeletProduct.onsubmit = (e)=>{
     e.preventDefault()
-    const idproduct = id.value
+    const idproduct = parseInt(formularioDeletProduct.value)
     socketClient.emit('deletProduct', idproduct)
 }
 
-socketClient.on('arrProductsHome',(arrProducts)=>{
-    const arrProd = [...arrProducts]
-    .map((objProduct)=>{
-        return `<p> title: ${objProduct.title}
-                    description: ${objProduct.description}
-                    price: $${objProduct.price}
-                    code: ${objProduct.code}
-                    stock: ${objProduct.stock}
-                </p>`
-    })
-    productListHome.innerHTML = arrProd
-    console.log(arrProd)
+socketClient.on('addProduct',async(product)=>{
+    const newProduct = 
+                    `<div>
+                        <p> title: ${product.title}</p>
+                        <p> description: ${productroduct.description}</p>
+                        <p> price: $${productroduct.price}</p>
+                        <p> imagen: ${productroduct.thumbnail}</p>
+                        <p> code: ${productroduct.code}</p>
+                        <p> stock: ${productroduct.stock}</p>
+                        <p> id: ${product.id}</p>
+                    </div>`
+    ;
+    console.log(newProduct)
+    productListHome.innerHTML = newProduct
 })
 
-socketClient.on('arrProductsRealTime', (arrProducts)=>{
-    const arrProd = [...arrProducts]
-    .map((objProduct)=>{
-        return `<p> title: ${objProduct.title}
-                    description: ${objProduct.description}
-                    price: $${objProduct.price}
-                    code: ${objProduct.code}
-                    stock: ${objProduct.stock}`
-    })
-    productListInRealTime.innerHTML = arrProd
-})
 
-socketClient.on('listRefresh',(arrProducts)=>{
-    const arrProd = [...arrProducts]
-    .map((objProduct)=>{
-        return `<p> title: ${objProduct.title}
-                    description: ${objProduct.description}
-                    price: $${objProduct.price}
-                    code: ${objProduct.code}
-                    stock: ${objProduct.stock}`
-    })
-    productListInRealTime.innerHTML = arrProd
-})
+
+
 
 
 
