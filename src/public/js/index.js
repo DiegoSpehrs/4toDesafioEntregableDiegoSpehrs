@@ -46,7 +46,7 @@ socketClient.on('arrProductsHome',(arrProducts)=>{
                 </p>`
     })
     productListHome.innerHTML = arrProd
-
+    console.log(arrProd)
 })
 
 socketClient.on('arrProductsRealTime', (arrProducts)=>{
@@ -61,7 +61,7 @@ socketClient.on('arrProductsRealTime', (arrProducts)=>{
     productListInRealTime.innerHTML = arrProd
 })
 
-socketClient.on('productoAgregado',(arrProducts)=>{
+socketClient.on('listRefresh',(arrProducts)=>{
     const arrProd = [...arrProducts]
     .map((objProduct)=>{
         return `<p> title: ${objProduct.title}
@@ -72,20 +72,6 @@ socketClient.on('productoAgregado',(arrProducts)=>{
     })
     productListInRealTime.innerHTML = arrProd
 })
-
-socketClient.on('productoEliminado',(arrProducts)=>{
-    const arrProd = [...arrProducts]
-    .map((objProduct)=>{
-        return `<p> title: ${objProduct.title}
-                    description: ${objProduct.description}
-                    price: $${objProduct.price}
-                    code: ${objProduct.code}
-                    stock: ${objProduct.stock}`
-    })
-    productListInRealTime.innerHTML = arrProd
-})
-
-
 
 
 

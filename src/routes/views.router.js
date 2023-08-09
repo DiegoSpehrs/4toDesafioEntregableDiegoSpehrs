@@ -7,7 +7,7 @@ router.get('/',(req,res) =>{
     res.render('bodyHome')
 })
 
-router.post('/realtimeproducts',(req,res)=>{    
+router.get('/realtimeproducts',(req,res)=>{    
     res.render('realTimeProducts')
 })
 
