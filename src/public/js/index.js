@@ -23,7 +23,6 @@ formularioAddProduct.onsubmit = (e)=>{
         thumbnail: thumbnail.value,
         code: code.value,
         stock: stock.value,
-        id: idProduct.value
     }
     socketClient.emit('addProduct',product)
 }
@@ -34,7 +33,8 @@ formularioDeletProduct.onsubmit = (e)=>{
     socketClient.emit('deletProduct', idproduct)
 }
 
-socketClient.on('addProduct',async(product)=>{
+socketClient.on('addProductSuccess',async(product)=>{
+    console.log(product);
     const newProduct = 
                     `<div>
                         <p> title: ${product.title}</p>
@@ -46,8 +46,7 @@ socketClient.on('addProduct',async(product)=>{
                         <p> id: ${product.id}</p>
                     </div>`
     ;
-    console.log(newProduct)
-    productListHome.innerHTML = newProduct
+    productsInRealTime.innerHTML = newProduct
 })
 
 

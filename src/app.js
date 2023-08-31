@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-app.use(express.static(__dirname+'public'))
+app.use(express.static(__dirname+'/public'))
 
 app.engine('handlebars',hanldebars.engine())
 app.set('views',__dirname+'/views')
@@ -39,7 +39,7 @@ const socketServer = new Server(httpServer)
 socketServer.on('connection',(socket)=>{
     console.log(`Usuario conectado: ${socket.id}`);
     
-    socketServer.on('addProduct',async(newProduct)=>{ 
+    socket.on('addProduct',async(newProduct)=>{ 
         try{
             const addProduct = await productManager.addProduct(
                 newProduct.title,
@@ -50,13 +50,13 @@ socketServer.on('connection',(socket)=>{
                 newProduct.stock,
                 newProduct.id                
             );
-            socketServer.emit("addProductSuccess", addProduct);
+            socketServer.emit("addProductSuccess", newProduct);
         }catch(error){
             socket.emit('errorAddProd',"error al agregar el producto")
         }  
     })
 
-    socketServer.on('deletPorduct',async(idProduct)=>{
+    socket.on('deletPorduct',async(idProduct)=>{
         try{
             const producDeleted = await productManager.deletProduct(idProduct)
             socketServer.emit("deleteProductSuccess", producDeleted);
